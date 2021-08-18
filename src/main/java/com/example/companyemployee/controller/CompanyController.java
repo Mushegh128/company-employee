@@ -1,13 +1,13 @@
-package controller;
+package com.example.companyemployee.controller;
 
-import model.Company;
+import com.example.companyemployee.model.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import repository.CompanyRepository;
+import com.example.companyemployee.repository.CompanyRepository;
 
 import java.util.List;
 
