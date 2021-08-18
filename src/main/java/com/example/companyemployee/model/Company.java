@@ -19,5 +19,5 @@ public class Company {
     private int id;
     private String name;
     private int size;
-    private String adress;
+    private String address;
 }

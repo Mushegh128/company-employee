@@ -3,7 +3,6 @@ package com.example.companyemployee.controller;
 import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +19,12 @@ public class EmployeeController {
     @Autowired
     private CompanyRepository companyRepository;
 
-    @Value("${upload.dir}")
-    private String uploadDir;
-
     @GetMapping("/employeesAll")
     public String employees(ModelMap modelMap) {
-        try {
             List<Employee> employees = employeeRepository.findAll();
             modelMap.addAttribute("employees", employees);
             return "employees";
-        } catch (Exception e) {
-            return "redirect:/";
-        }
+
 
     }
 

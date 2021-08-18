@@ -21,8 +21,8 @@
     <td th:text="${company.id}"></td>
     <td th:text="${company.name}"></td>
     <td th:text="${company.size}"></td>
-    <td th:text="${company.adress}"></td>
-    <td><a th:href="@{/deleteCompay/{id} ( id=${company.id})}" href="#">delete</a></td>
+    <td th:text="${company.address}"></td>
+    <td><a th:href="@{/deleteCompany/{id}(id=${company.id})}" href="#">delete</a></td>
   </tr>
 </table>
 </body>
