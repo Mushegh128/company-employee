@@ -30,8 +30,7 @@
         <td th:text="${employee.salary}"></td>
         <td th:text="${employee.position}"></td>
         <td th:text="${employee.company.name}"></td>
-        <td><a th:href="@{/deleteEmployee/{id} ( id=${employee.id})}" href="#">delete</a></td>
-
+        <td><a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" href="#">delete</a></td>
 
     </tr>
 </table>

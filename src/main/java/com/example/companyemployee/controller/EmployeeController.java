@@ -21,9 +21,9 @@ public class EmployeeController {
 
     @GetMapping("/employeesAll")
     public String employees(ModelMap modelMap) {
-            List<Employee> employees = employeeRepository.findAll();
-            modelMap.addAttribute("employees", employees);
-            return "employees";
+        List<Employee> employees = employeeRepository.findAll();
+        modelMap.addAttribute("employees", employees);
+        return "employees";
 
 
     }
@@ -37,22 +37,25 @@ public class EmployeeController {
 
     @PostMapping("/addEmployee")
     public String addEmployeePost(@ModelAttribute Employee employee) {
-        Company company = employee.getCompany();
+        Optional<Company> companyOptional = companyRepository.findById(employee.getCompany().getId());
+        Company company = companyOptional.get();
         int size = company.getSize();
-        company.setSize(size++);
+        company.setSize(++size);
         companyRepository.save(company);
         employeeRepository.save(employee);
-        return "redirect:/employeeAll";
+
+        return "redirect:/employeesAll";
     }
 
     @GetMapping("/deleteEmployee/{id}")
     public String deleteEmployee(@PathVariable int id) {
         Optional<Employee> employee = employeeRepository.findById(id);
-        if (employee.isPresent()){
+        if (employee.isPresent()) {
             Employee employeePr = employee.get();
-            Company company = employeePr.getCompany();
+            Optional<Company> companyOpt = companyRepository.findById(employeePr.getCompany().getId());
+            Company company = companyOpt.get();
             int size = company.getSize();
-            company.setSize(size--);
+            company.setSize(--size);
             companyRepository.save(company);
         }
         employeeRepository.deleteById(id);

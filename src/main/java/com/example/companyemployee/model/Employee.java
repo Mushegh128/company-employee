@@ -24,7 +24,7 @@ public class Employee {
     private int phoneNumber;
     private String salary;
     private String position;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     private Company company;
 

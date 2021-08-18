@@ -6,7 +6,7 @@
     <title>add Employee</title>
 </head>
 <body>
-<form enctype="multipart/form-data" action="/addEmployee" method="post">
+<form action="/addEmployee" method="post">
     <input type="text" name="name" placeholder="name"><br>
     <input type="text" name="surname" placeholder="surname"><br>
     <input type="text" name="email" placeholder="email"><br>
@@ -16,8 +16,7 @@
     <select name="company.id">
         Company:
         <option th:each="company: ${companies}" th:text="${company.name}" th:value="${company.id}"></option>
-    </select>
-    Image: <input type="file" name="picture"><br>
+    </select><br>
     <input type="submit" value="add">
 </form>
 </body>
