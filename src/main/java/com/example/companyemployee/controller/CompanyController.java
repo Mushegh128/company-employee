@@ -1,6 +1,8 @@
 package com.example.companyemployee.controller;
 
 import com.example.companyemployee.model.Company;
+import com.example.companyemployee.model.Employee;
+import com.example.companyemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +19,8 @@ import java.util.List;
 public class CompanyController {
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @GetMapping("/companies")
     public String companies(ModelMap modelMap) {
@@ -42,6 +46,13 @@ public class CompanyController {
         companyRepository.deleteById(id);
 
         return "redirect:/companies";
+    }
+
+    @GetMapping("/companiesEmployees/{id}")
+    public String companiesEmployees(@PathVariable int id, ModelMap modelMap){
+        List<Employee> employeeByCompanyId = employeeRepository.getEmployeeByCompanyId(id);
+        modelMap.addAttribute("employees",employeeByCompanyId);
+        return "employees";
     }
 
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <a href="/">home</a><br>
-<a href="/addEmployee" >add employee</a>
+<a href="/addEmployee">add employee</a>
 <table border="1">
     <tr>
         <th>id</th>
@@ -29,7 +29,8 @@
         <td th:text="${employee.phoneNumber}"></td>
         <td th:text="${employee.salary}"></td>
         <td th:text="${employee.position}"></td>
-        <td th:text="${employee.company.name}"></td>
+        <td><a th:href="@{/companiesEmployees/{id}(id=${employee.company.id})}" href="#"><span
+                th:text="${employee.company.name}"></span></a></td>
         <td><a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" href="#">delete</a></td>
 
     </tr>
