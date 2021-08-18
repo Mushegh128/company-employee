@@ -49,9 +49,9 @@ public class CompanyController {
     }
 
     @GetMapping("/companiesEmployees/{id}")
-    public String companiesEmployees(@PathVariable int id, ModelMap modelMap){
+    public String companiesEmployees(@PathVariable int id, ModelMap modelMap) {
         List<Employee> employeeByCompanyId = employeeRepository.getEmployeeByCompanyId(id);
-        modelMap.addAttribute("employees",employeeByCompanyId);
+        modelMap.addAttribute("employees", employeeByCompanyId);
         return "employees";
     }
 
