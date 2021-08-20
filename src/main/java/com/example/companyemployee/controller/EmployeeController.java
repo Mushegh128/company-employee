@@ -2,26 +2,24 @@ package com.example.companyemployee.controller;
 
 import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.companyemployee.service.CompanyService;
+import com.example.companyemployee.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import com.example.companyemployee.repository.CompanyRepository;
-import com.example.companyemployee.repository.EmployeeRepository;
-
 import java.util.List;
-import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class EmployeeController {
-    @Autowired
-    private EmployeeRepository employeeRepository;
-    @Autowired
-    private CompanyRepository companyRepository;
+
+    private final CompanyService companyService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/employeesAll")
     public String employees(ModelMap modelMap) {
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeService.findAll();
         modelMap.addAttribute("employees", employees);
         return "employees";
 
@@ -30,35 +28,20 @@ public class EmployeeController {
 
     @GetMapping("/addEmployee")
     public String addEmployee(ModelMap modelMap) {
-        List<Company> companies = companyRepository.findAll();
+        List<Company> companies = companyService.findAll();
         modelMap.addAttribute("companies", companies);
         return "addEmployee";
     }
 
     @PostMapping("/addEmployee")
     public String addEmployeePost(@ModelAttribute Employee employee) {
-        Optional<Company> companyOptional = companyRepository.findById(employee.getCompany().getId());
-        Company company = companyOptional.get();
-        int size = company.getSize();
-        company.setSize(++size);
-        companyRepository.save(company);
-        employeeRepository.save(employee);
-
+        employeeService.save(employee);
         return "redirect:/employeesAll";
     }
 
     @GetMapping("/deleteEmployee/{id}")
     public String deleteEmployee(@PathVariable int id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        if (employee.isPresent()) {
-            Employee employeePr = employee.get();
-            Optional<Company> companyOpt = companyRepository.findById(employeePr.getCompany().getId());
-            Company company = companyOpt.get();
-            int size = company.getSize();
-            company.setSize(--size);
-            companyRepository.save(company);
-        }
-        employeeRepository.deleteById(id);
+        employeeService.deleteById(id);
         return "redirect:/employeesAll";
     }
 
