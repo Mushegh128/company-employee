@@ -13,7 +13,7 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public List<Company> findAll(){
+    public List<Company> findAll() {
         return companyRepository.findAll();
     }
 

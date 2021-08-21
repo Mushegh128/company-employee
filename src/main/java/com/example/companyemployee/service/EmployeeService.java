@@ -6,6 +6,7 @@ import com.example.companyemployee.repository.CompanyRepository;
 import com.example.companyemployee.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll() {
-      return   employeeRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     public void save(Employee employee) {
