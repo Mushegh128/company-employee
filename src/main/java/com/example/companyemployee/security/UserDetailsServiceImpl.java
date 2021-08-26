@@ -20,7 +20,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<User> userByEmail = userRepository.findUserByEmail(s);
         if (userByEmail.isPresent()) {
             return new CurrentUser(userByEmail.get());
+        } else {
+            return null;
         }
-        return null;
     }
 }
