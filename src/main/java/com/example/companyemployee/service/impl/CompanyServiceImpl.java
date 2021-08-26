@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,5 +27,10 @@ public class CompanyServiceImpl implements com.example.companyemployee.service.C
     @Override
     public void deleteById(int id) {
         companyRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Company> findCompanyByEmail(String s) {
+        return companyRepository.findCompanyByEmail(s);
     }
 }

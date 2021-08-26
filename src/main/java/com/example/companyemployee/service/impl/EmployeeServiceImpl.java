@@ -49,4 +49,10 @@ public class EmployeeServiceImpl implements com.example.companyemployee.service.
             companyRepository.save(company);
         }
     }
+
+    @Override
+    public Optional<Employee> findByEmail(String email) {
+       return employeeRepository.findByEmail(email);
+    }
+
 }

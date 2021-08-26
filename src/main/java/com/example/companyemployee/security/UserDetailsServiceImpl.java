@@ -1,27 +1,34 @@
 package com.example.companyemployee.security;
 
-import com.example.companyemployee.model.User;
-import com.example.companyemployee.repository.UserRepository;
+import com.example.companyemployee.model.Company;
+import com.example.companyemployee.model.Employee;
+import com.example.companyemployee.service.impl.MainServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
-    private UserRepository userRepository;
+    private MainServiceImpl mainService;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Optional<User> userByEmail = userRepository.findUserByEmail(s);
-        if (userByEmail.isPresent()) {
-            return new CurrentUser(userByEmail.get());
-        } else {
-            return null;
+
+        Object byEmail = mainService.findByEmail(s);
+        if (byEmail != null) {
+            if (byEmail instanceof Employee) {
+                Employee employee = (Employee) byEmail;
+                return new CurrentUser(employee);
+            } else if(byEmail instanceof Company) {
+                Company company = (Company) byEmail;
+                return new CurrentUser(company);
+            }
         }
+        throw new UsernameNotFoundException("does not exists");
     }
 }

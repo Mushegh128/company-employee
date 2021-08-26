@@ -12,5 +12,15 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/registrationCompany")
+    public String regCompany(){
+        return "registrationCompany";
+    }
+
+    @GetMapping("/registrationEmployee")
+    public String regEmployee(){
+        return "registrationEmployee";
+    }
+
 
 }

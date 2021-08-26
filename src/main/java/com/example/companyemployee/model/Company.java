@@ -18,8 +18,9 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String password;
     private int size;
     private String address;
+    private String email;
+    private String password;
 
 }

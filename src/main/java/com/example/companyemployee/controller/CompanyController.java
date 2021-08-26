@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -21,6 +22,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final EmployeeService employeeService;
+
 
     @GetMapping("/companies")
     public String companies(ModelMap modelMap) {
@@ -36,15 +38,18 @@ public class CompanyController {
 
     @PostMapping("/addCompany")
     public String addCompanyPost(@ModelAttribute Company company) {
+        Optional<Company> companyByEmail = companyService.findCompanyByEmail(company.getEmail());
+        Optional<Employee> employeeByEmail = employeeService.findByEmail(company.getEmail());
+        if (companyByEmail.isPresent() || employeeByEmail.isPresent()){
+            return "redirect:/";
+        }
         companyService.save(company);
         return "redirect:/companies";
     }
 
     @GetMapping("/deleteCompany/{id}")
     public String deleteCompany(@PathVariable int id) {
-
         companyService.deleteById(id);
-
         return "redirect:/companies";
     }
 

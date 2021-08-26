@@ -19,6 +19,7 @@ public class Employee {
     private String name;
     private String surname;
     private String email;
+    private String password;
     @JoinColumn(name = "phone_numbrer")
     private int phoneNumber;
     private String salary;
