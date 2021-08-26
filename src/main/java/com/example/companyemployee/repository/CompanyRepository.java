@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
     @Query
-    @Modifying
     Optional<Company> findCompanyByEmail(String s);
 
 }

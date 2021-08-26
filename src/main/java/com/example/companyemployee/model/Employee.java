@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +29,17 @@ public class Employee {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @ManyToMany
+    @JoinTable(name = "EMPLOYEE_MASSAGE",
+            joinColumns = @JoinColumn(name = "EMPLOYEE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "MASSAGE_ID"))
+    private List<Massage> massage;
+
+    public List<Massage> getMassage() {
+        return massage;
+    }
+
+    public void setMassage(List<Massage> massage) {
+        this.massage = massage;
+    }
 }
