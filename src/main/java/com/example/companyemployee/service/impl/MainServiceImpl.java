@@ -18,13 +18,11 @@ public class MainServiceImpl {
 
     public Object findByEmail(String s){
         Optional<Employee> employeeOpt = employeeRepository.findByEmail(s);
-        Optional<Company> companyOpt = companyRepository.findByEmail(s);
+        Optional<Company> companyOpt = companyRepository.findCompanyByEmail(s);
 
         if (employeeOpt.isPresent()){
             return employeeOpt.get();
-        }else if(companyOpt.isPresent()){
-            return companyOpt.get();
-        }else return null;
+        }else return companyOpt.orElse(null);
     }
 
 }

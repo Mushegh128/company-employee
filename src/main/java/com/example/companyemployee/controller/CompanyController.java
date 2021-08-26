@@ -38,6 +38,7 @@ public class CompanyController {
 
     @PostMapping("/addCompany")
     public String addCompanyPost(@ModelAttribute Company company) {
+
         Optional<Company> companyByEmail = companyService.findCompanyByEmail(company.getEmail());
         Optional<Employee> employeeByEmail = employeeService.findByEmail(company.getEmail());
         if (companyByEmail.isPresent() || employeeByEmail.isPresent()){

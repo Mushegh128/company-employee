@@ -15,7 +15,4 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
     @Modifying
     Optional<Company> findCompanyByEmail(String s);
 
-    @Query
-    @Modifying
-    Optional<Company> findByEmail(String s);
 }
