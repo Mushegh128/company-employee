@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/COMPANY/**")
                 .hasAnyAuthority("COMPANY")
                 .antMatchers(HttpMethod.GET, "/EMPLOYEE/**")
-                .hasAnyAuthority( "EMPLOYEE")
+                .hasAnyAuthority("EMPLOYEE")
                 .antMatchers(HttpMethod.GET, "/")
                 .permitAll()
                 .and()

@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             if (byEmail instanceof Employee) {
                 Employee employee = (Employee) byEmail;
                 return new CurrentUser(employee);
-            } else if(byEmail instanceof Company) {
+            } else if (byEmail instanceof Company) {
                 Company company = (Company) byEmail;
                 return new CurrentUser(company);
             }

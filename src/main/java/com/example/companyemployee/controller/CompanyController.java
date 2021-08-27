@@ -2,9 +2,12 @@ package com.example.companyemployee.controller;
 
 import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
+import com.example.companyemployee.security.CurrentUser;
 import com.example.companyemployee.service.CompanyService;
 import com.example.companyemployee.service.EmployeeService;
+import com.example.companyemployee.service.impl.MessageServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final EmployeeService employeeService;
+    private final MessageServiceImpl messageService;
 
 
     @GetMapping("/companies")
@@ -41,7 +45,7 @@ public class CompanyController {
 
         Optional<Company> companyByEmail = companyService.findCompanyByEmail(company.getEmail());
         Optional<Employee> employeeByEmail = employeeService.findByEmail(company.getEmail());
-        if (companyByEmail.isPresent() || employeeByEmail.isPresent()){
+        if (companyByEmail.isPresent() || employeeByEmail.isPresent()) {
             return "redirect:/";
         }
         companyService.save(company);
@@ -55,9 +59,13 @@ public class CompanyController {
     }
 
     @GetMapping("/companiesEmployees/{id}")
-    public String companiesEmployees(@PathVariable int id, ModelMap modelMap) {
+    public String companiesEmployees(@PathVariable int id, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Employee> employeeByCompanyId = employeeService.getEmployeeByCompanyId(id);
         modelMap.addAttribute("employees", employeeByCompanyId);
+        if (currentUser.getEmployee() != null) {
+            messageService.findAllByToId(id);
+            modelMap.addAttribute("currentUser", currentUser);
+        }
         return "employees";
     }
 

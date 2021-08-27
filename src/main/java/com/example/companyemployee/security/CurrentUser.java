@@ -1,4 +1,5 @@
 package com.example.companyemployee.security;
+
 import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
 import org.springframework.security.core.authority.AuthorityUtils;

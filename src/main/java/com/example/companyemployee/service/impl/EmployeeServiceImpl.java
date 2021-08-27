@@ -52,7 +52,14 @@ public class EmployeeServiceImpl implements com.example.companyemployee.service.
 
     @Override
     public Optional<Employee> findByEmail(String email) {
-       return employeeRepository.findByEmail(email);
+        return employeeRepository.findByEmail(email);
     }
 
+    public Employee findById(int id) {
+        Optional<Employee> byId = employeeRepository.findById(id);
+        if (byId.isPresent()) {
+            return byId.get();
+        }
+        return null;
+    }
 }
