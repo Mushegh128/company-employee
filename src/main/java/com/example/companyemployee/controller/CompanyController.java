@@ -2,6 +2,7 @@ package com.example.companyemployee.controller;
 
 import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
+import com.example.companyemployee.model.Message;
 import com.example.companyemployee.security.CurrentUser;
 import com.example.companyemployee.service.CompanyService;
 import com.example.companyemployee.service.EmployeeService;
@@ -63,8 +64,9 @@ public class CompanyController {
         List<Employee> employeeByCompanyId = employeeService.getEmployeeByCompanyId(id);
         modelMap.addAttribute("employees", employeeByCompanyId);
         if (currentUser.getEmployee() != null) {
-            messageService.findAllByToId(id);
+            List<Message> allMessage = messageService.findAllByToId(id);
             modelMap.addAttribute("currentUser", currentUser);
+            modelMap.addAttribute("allMassage", allMessage);
         }
         return "employees";
     }
