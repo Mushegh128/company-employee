@@ -23,8 +23,8 @@ public class MainController {
         if (currentUser != null && currentUser.isEnabled()) {
             if (currentUser.getEmployee() != null) {
                 Employee employee = currentUser.getEmployee();
-                //int id = employee.getCompany().getId();
-                return "redirect:/companiesEmployees/" + 15;
+                int id = employee.getCompany().getId();
+                return "redirect:/companiesEmployees/" + id;
             } else if (currentUser.getCompany() != null) {
                 int id = currentUser.getCompany().getId();
                 return "redirect:/companiesEmployees/" + id;
