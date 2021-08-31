@@ -1,6 +1,7 @@
 package com.example.companyemployee.controller;
 
 import com.example.companyemployee.model.Employee;
+import com.example.companyemployee.model.Message;
 import com.example.companyemployee.security.CurrentUser;
 import com.example.companyemployee.service.EmployeeService;
 import com.example.companyemployee.service.MessageService;
@@ -8,8 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -30,4 +30,17 @@ public class MessageController {
         return "messenger";
     }
 
+    @PostMapping("/sendMessage/{id}")
+    public String sendMessagePost(@PathVariable int id, @ModelAttribute Message message,@AuthenticationPrincipal CurrentUser currentUser ){
+        Optional<Employee> byId = employeeService.findById(id);
+        if (byId.isPresent()){
+            Employee employee = byId.get();
+            message.setFromEmployee(currentUser.getEmployee());
+            message.setToEmployee(employee);
+            messageService.save(message);
+            return "redirect:/sendMessage/" + employee.getId();
+        }
+        return "home/employee";
+
+    }
 }

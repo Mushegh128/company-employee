@@ -20,4 +20,7 @@ public class MessageService {
         return dialogList;
     }
 
+    public void save(Message message) {
+        messageRepository.save(message);
+    }
 }

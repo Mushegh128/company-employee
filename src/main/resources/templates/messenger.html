@@ -6,8 +6,15 @@
     <title>messenger</title>
 </head>
 <body>
-        <div th:if="${dialog != null}" th:each="message: ${dialog}">
-            <h3 th:text="message.text"></h3>
+        <div th:if="${dialog != null}">
+            <ul th:each="message: ${dialog}">
+                <li th:text="${message.fromEmployee.name} + ' ' +  ${message.fromEmployee.surname} +': _' + ${message.text}"></li>
+            </ul>
         </div>
+        <form action="/sendMessage/" + th:text="toEmployee.id" method="post">
+            <input type="text" value="text">
+            <input type="submit" value="send">
+        </form>
+
 </body>
 </html>
