@@ -15,19 +15,19 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private  PasswordEncoder passwordEncoder;
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private  UserDetailsServiceImpl userDetailsService;
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/COMPANY/**")
-                .hasAnyAuthority("COMPANY")
-                .antMatchers(HttpMethod.GET, "/EMPLOYEE/**")
-                .hasAnyAuthority("EMPLOYEE")
+                .antMatchers(HttpMethod.GET, "/company/**")
+                .hasAnyAuthority("employee")
+                .antMatchers(HttpMethod.GET, "/employee/**")
+                .hasAnyAuthority("employee")
                 .antMatchers(HttpMethod.GET, "/")
                 .permitAll()
                 .and()

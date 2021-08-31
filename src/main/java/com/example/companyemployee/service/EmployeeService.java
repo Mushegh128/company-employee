@@ -1,18 +1,45 @@
 package com.example.companyemployee.service;
 
+import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
+import com.example.companyemployee.model.Role;
+import com.example.companyemployee.repository.CompanyRepository;
+import com.example.companyemployee.repository.EmployeeRepository;
+import com.example.companyemployee.security.CurrentUser;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface EmployeeService {
-    List<Employee> getEmployeeByCompanyId(int id);
+@Service
+@RequiredArgsConstructor
+public class EmployeeService {
+    @Value("mainEmail")
+    String mainEmail;
+    private final EmployeeRepository employeeRepository;
+    private final CompanyRepository companyRepository;
 
-    List<Employee> findAll();
+    public List<Employee> findByCompany(Company company){
+        return employeeRepository.findByCompany(company);
+    }
 
-    void save(Employee employee);
+    public Optional<Employee> findByEmail(String email){
+        return employeeRepository.findByEmail(email);
+    }
 
-    void deleteById(int id);
+    public void save(Employee employee) {
+        Optional<Company> byEmail = companyRepository.findByEmail(mainEmail);
+        byEmail.ifPresent(employee::setCompany);
+        employee.setRole(Role.EMPLOYEE);
+        employeeRepository.save(employee);
+        new CurrentUser(employee);
+    }
 
-    Optional<Employee> findByEmail(String email);
+
+    public Optional<Employee> findById(int id) {
+       return employeeRepository.findById(id);
+    }
 }

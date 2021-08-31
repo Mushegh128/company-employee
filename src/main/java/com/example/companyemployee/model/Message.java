@@ -17,12 +17,11 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String text;
     @ManyToOne
-    @JoinColumn(name = "from_id")
-    private Employee fromId;
+    private Employee fromEmployee;
     @ManyToOne
-    @JoinColumn(name = "to_id")
-    private Employee toId;
+    private Employee toEmployee;
 
 
 }

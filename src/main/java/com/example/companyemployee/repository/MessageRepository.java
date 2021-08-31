@@ -1,13 +1,13 @@
 package com.example.companyemployee.repository;
 
+import com.example.companyemployee.model.Employee;
 import com.example.companyemployee.model.Message;
+import com.example.companyemployee.security.CurrentUser;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface MessageRepository extends JpaRepository<Message,Integer> {
 
-    List<Message> findByToId(int toId);
+    List<Message> findAllByFromEmployeeAndToEmployee(CurrentUser fromEmployee, Employee toEmployee);
 }

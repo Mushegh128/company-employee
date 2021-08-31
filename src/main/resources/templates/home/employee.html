@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>name</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>phoneNumber</th>
+        <th>position</th>
+        <th>company name</th>
+        <th>connect</th>
+
+    </tr>
+    <tr th:each="employee: ${byCompany}">
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.surname}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.position}"></td>
+        <td><span th:text="${employee.company.name}"></span></td>
+        <td><a th:href="@{/sendMessage/{id}(id=${employee.id})}" href="#">
+            <span>
+
+            </span>
+         send message </a
+        ></td>
+
+    </tr>
+</table>
+
+</body>
+</html>

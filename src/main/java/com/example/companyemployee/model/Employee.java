@@ -21,13 +21,13 @@ public class Employee {
     private String surname;
     private String email;
     private String password;
-    @JoinColumn(name = "phone_numbrer")
     private int phoneNumber;
     private String salary;
     private String position;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id")
+    @ManyToOne
     private Company company;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
 }
