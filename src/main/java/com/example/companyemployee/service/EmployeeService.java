@@ -8,7 +8,7 @@ import com.example.companyemployee.repository.EmployeeRepository;
 import com.example.companyemployee.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +17,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
-    @Value("mainEmail")
-    String mainEmail;
     private final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public List<Employee> findByCompany(Company company){
         return employeeRepository.findByCompany(company);
@@ -30,10 +29,11 @@ public class EmployeeService {
         return employeeRepository.findByEmail(email);
     }
 
-    public void save(Employee employee) {
-        Optional<Company> byEmail = companyRepository.findByEmail(mainEmail);
+    public void registrationEmployee(Employee employee) {
+        Optional<Company> byEmail = companyRepository.findByName("JFC(Job Finder Company");
         byEmail.ifPresent(employee::setCompany);
         employee.setRole(Role.EMPLOYEE);
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employeeRepository.save(employee);
         new CurrentUser(employee);
     }

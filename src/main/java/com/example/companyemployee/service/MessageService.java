@@ -15,7 +15,7 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
 
-    public List<Message> findDialog(CurrentUser fromEmployee, Employee toEmployee){
+    public List<Message> findDialog(Employee fromEmployee, Employee toEmployee){
         List<Message> dialogList = messageRepository.findAllByFromEmployeeAndToEmployee(fromEmployee, toEmployee);
         return dialogList;
     }

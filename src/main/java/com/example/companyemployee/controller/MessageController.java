@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -22,25 +23,27 @@ public class MessageController {
     private final MessageService messageService;
 
     @GetMapping("/sendMessage/{id}")
-    public String sendMessage(@PathVariable int id, ModelMap modelMap,@AuthenticationPrincipal CurrentUser currentUser){
+    public String sendMessage(@PathVariable int id, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         Optional<Employee> byId = employeeService.findById(id);
         byId.ifPresent(employee -> modelMap.addAttribute("toEmployee", employee));
-        modelMap.addAttribute("fromEmployee",currentUser);
-        modelMap.addAttribute("dialog",messageService.findDialog(currentUser,byId.get()));
+        List<Message> sendMessages = messageService.findDialog(currentUser.getEmployee(), byId.get());
+        List<Message> receivedMessages = messageService.findDialog(byId.get(),currentUser.getEmployee());
+        modelMap.addAttribute("fromEmployee", currentUser.getEmployee());
+        modelMap.addAttribute("sendMessages", sendMessages);
+        modelMap.addAttribute("receivedMessages", receivedMessages);
         return "messenger";
     }
 
-    @PostMapping("/sendMessage/{id}")
-    public String sendMessagePost(@PathVariable int id, @ModelAttribute Message message,@AuthenticationPrincipal CurrentUser currentUser ){
+    @PostMapping("/message/send")
+    public String sendMessagePost(@ModelAttribute Message message, @RequestParam("toEmployee_id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
         Optional<Employee> byId = employeeService.findById(id);
-        if (byId.isPresent()){
-            Employee employee = byId.get();
+        if (byId.isPresent()) {
+            Employee toEmployee = byId.get();
+            message.setToEmployee(toEmployee);
             message.setFromEmployee(currentUser.getEmployee());
-            message.setToEmployee(employee);
             messageService.save(message);
-            return "redirect:/sendMessage/" + employee.getId();
+            return "redirect:/sendMessage/" + toEmployee.getId();
         }
-        return "home/employee";
-
+        return "redirect:/employeeHome";
     }
 }

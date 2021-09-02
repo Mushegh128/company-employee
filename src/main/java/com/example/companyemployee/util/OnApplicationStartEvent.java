@@ -25,7 +25,7 @@ public class OnApplicationStartEvent implements ApplicationListener<ApplicationR
         if (employeeRepository.findByEmail("admin@mail.com").isEmpty()) {
             Company company = Company.builder()
                     .name("JFC(Job Finder Company")
-                    .address("Armenia, Gyumri")
+                    .address("Armenia")
                     .build();
             companyRepository.save(company);
             employeeRepository.save(Employee.builder()
