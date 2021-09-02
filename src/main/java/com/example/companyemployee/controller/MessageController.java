@@ -27,7 +27,7 @@ public class MessageController {
         Optional<Employee> byId = employeeService.findById(id);
         byId.ifPresent(employee -> modelMap.addAttribute("toEmployee", employee));
         List<Message> sendMessages = messageService.findDialog(currentUser.getEmployee(), byId.get());
-        List<Message> receivedMessages = messageService.findDialog(byId.get(),currentUser.getEmployee());
+        List<Message> receivedMessages = messageService.findDialog(byId.get(), currentUser.getEmployee());
         modelMap.addAttribute("fromEmployee", currentUser.getEmployee());
         modelMap.addAttribute("sendMessages", sendMessages);
         modelMap.addAttribute("receivedMessages", receivedMessages);

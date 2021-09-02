@@ -14,8 +14,8 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal CurrentUser currentUser){
-        if (currentUser != null){
+    public String home(@AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser != null) {
             return "redirect:/employeeHome";
         }
         return "index";

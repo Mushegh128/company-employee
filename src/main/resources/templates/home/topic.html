@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+      xsi:schemaLocation="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Topics</title>
 </head>
 <body>
-
+<h1>Topics</h1>
+<div th:if="topics != null" th:each="topic: ${topics}">
+    Author: <h1 style="color: black" th:text="topic.employee.name"></h1><br>
+    TOPIC: <a th:href="@{/comment/byTopic/{id} (id=${topic.id})}" href="#"><h2 style="color: teal"
+                                                                               th:text="topic.name"></h2></a>
+</div>
+<div>
+    <form action="/topic/add" method="post">
+        <input type="text" name="name">
+        <input type="submit" value="add topic">
+    </form>
+</div>
 
 </body>
 </html>

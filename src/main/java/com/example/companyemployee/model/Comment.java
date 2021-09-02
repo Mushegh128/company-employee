@@ -21,5 +21,5 @@ public class Comment {
     @ManyToOne
     private Employee employee;
     @ManyToOne
-    private Comment comment;
+    private Topic topic;
 }

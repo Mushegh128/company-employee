@@ -7,7 +7,6 @@ import com.example.companyemployee.repository.CompanyRepository;
 import com.example.companyemployee.repository.EmployeeRepository;
 import com.example.companyemployee.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +20,11 @@ public class EmployeeService {
     private final CompanyRepository companyRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public List<Employee> findByCompany(Company company){
+    public List<Employee> findByCompany(Company company) {
         return employeeRepository.findByCompany(company);
     }
 
-    public Optional<Employee> findByEmail(String email){
+    public Optional<Employee> findByEmail(String email) {
         return employeeRepository.findByEmail(email);
     }
 
@@ -40,6 +39,6 @@ public class EmployeeService {
 
 
     public Optional<Employee> findById(int id) {
-       return employeeRepository.findById(id);
+        return employeeRepository.findById(id);
     }
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>single topic</title>
+</head>
+<body>
+<div>
+    TOPIC: <h1 th:text="topic.name"></h1>
+    Author: <h3 th:text="topic.employee.name"></h3>
+    <div>
+        <ol th:each="comment: ${comments}">
+            <h4 th:text="comment.employee.name"></h4>
+            <li th:text="comment.name"></li>
+        </ol>
+    </div>
+    <div style="border: 1px">
+        <form action="/comment/add" method="post">
+            <input type="text" name="description">
+            <input type="hidden" name="id" th:value="${topic.id}">
+            <input type="submit" value="add comment">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

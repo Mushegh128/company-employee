@@ -22,5 +22,4 @@ public class Company {
     private String address;
 
 
-
 }

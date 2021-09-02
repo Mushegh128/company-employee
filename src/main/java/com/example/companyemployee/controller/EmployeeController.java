@@ -21,21 +21,19 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
 
-
     @PostMapping("/employee/add")
-    public String addEmployeePost(@ModelAttribute Employee employee){
+    public String addEmployeePost(@ModelAttribute Employee employee) {
         employeeService.registrationEmployee(employee);
         return "redirect:/login";
     }
 
     @GetMapping("/employeeHome")
-    public String employeeHome(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap){
+    public String employeeHome(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
         Company company = currentUser.getEmployee().getCompany();
         List<Employee> byCompany = employeeService.findByCompany(company);
         modelMap.addAttribute("byCompany", byCompany);
         return "home/employee";
     }
-
 
 
 }

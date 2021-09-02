@@ -21,7 +21,7 @@ public class Topic {
     private String name;
     private Date date;
     @ManyToOne
-    private Comment comment;
+    private Employee employee;
     @ManyToOne
     private Company company;
 }

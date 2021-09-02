@@ -2,9 +2,7 @@ package com.example.companyemployee.repository;
 
 import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 import java.util.Optional;
 
