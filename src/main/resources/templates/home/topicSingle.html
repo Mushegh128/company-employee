@@ -6,6 +6,7 @@
     <title>single topic</title>
 </head>
 <body>
+<div th:include="/fragments/header::header"></div>
 <div>
     TOPIC: <h1 th:text="topic.name"></h1>
     Author: <h3 th:text="topic.employee.name"></h3>

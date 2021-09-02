@@ -6,12 +6,13 @@
     <title>Topics</title>
 </head>
 <body>
+<div th:include="/fragments/header::header"></div>
 <h1>Topics</h1>
 <div th:if="topics != null" th:each="topic: ${topics}">
     Author: <h1 style="color: black" th:text="topic.employee.name"></h1><br>
-    TOPIC: <a th:href="@{/comment/byTopic/{id} (id=${topic.id})}" href="#"><h2 style="color: teal"
-                                                                               th:text="topic.name"></h2></a>
+    TOPIC: <a th:href="@{/comment/byTopic/{id} (id=${topic.id})}" href="#" ><h2 style="color: teal" th:text="topic.name"></h2></a>
 </div>
+
 <div>
     <form action="/topic/add" method="post">
         <input type="text" name="name">
