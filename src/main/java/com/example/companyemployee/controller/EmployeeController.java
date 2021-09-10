@@ -4,6 +4,7 @@ import com.example.companyemployee.model.Company;
 import com.example.companyemployee.model.Employee;
 import com.example.companyemployee.security.CurrentUser;
 import com.example.companyemployee.service.EmployeeService;
+import com.example.companyemployee.service.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,12 +22,14 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final MailService mailService;
 
 //    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     @PostMapping("/employee/add")
     public String addEmployeePost(@ModelAttribute Employee employee) {
         employeeService.registrationEmployee(employee);
+        mailService.sendSimpleMessage("leninakan@inbox.ru","add User controllor","kuku");
         return "redirect:/login";
     }
 

@@ -6,6 +6,7 @@ import com.example.companyemployee.security.CurrentUser;
 import com.example.companyemployee.service.CommentService;
 import com.example.companyemployee.service.TopicService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class CommentController {
     private final TopicService topicService;
     private final CommentService commentService;
@@ -30,6 +32,7 @@ public class CommentController {
                 .topic(topic)
                 .employee(currentUser.getEmployee())
                 .build());
+
         return "redirect:/comment/byTopic/" + topic.getId();
     }
 
