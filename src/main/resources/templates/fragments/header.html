@@ -11,5 +11,10 @@
 <a href="/topic/byCompany">TOPICS</a> | <a href="/logout">LOGOUT</a> | <a th:if="currentUser.role == Role.COMPANY_ADMIN" href="/company/add">ADD COMPANY</a>
 </div>
 
+<div th:fragment="lang">
+    <a href="?lang=hy">ARM</a>
+    <a href="?lang=en">EN</a>
+</div>
+
 </body>
 </html>
