@@ -29,7 +29,7 @@ public class EmployeeController {
     @PostMapping("/employee/add")
     public String addEmployeePost(@ModelAttribute Employee employee) {
         employeeService.registrationEmployee(employee);
-        mailService.sendSimpleMessage("leninakanvdvdv@inbox.ru","add User controllor","kuku");
+        mailService.sendSimpleMessage("leninakanvdvdv@bk.ru","add User controllor","kuku");
         return "redirect:/login";
     }
 
